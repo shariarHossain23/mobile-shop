@@ -36,7 +36,11 @@
             </div>
             <div class="col-md-8">
               <div class="header-right d-flex justify-content-center">
-                <input type="text" placeholder="search phone" />
+                <input
+                  id="search-input"
+                  type="text"
+                  placeholder="search phone"
+                />
                 <span onclick="loadData()"
                   ><i class="fa-solid fa-magnifying-glass"></i
                 ></span>
@@ -45,7 +49,27 @@
           </div>
         </div>
       </header>
-      <section></section>
+
+      <!-- show search data  -->
+
+      <section>
+        <div class="container">
+          <div id="phone-show" class="row">
+            <!-- <div class="col-md-4">
+              <div class="card mt-4">
+                <div>
+                  <img src="" alt="" />
+                </div>
+                <h5>Name:</h5>
+                <h5>Model:</h5>
+                <div>
+                  <button onclick="" class="mobile-btn">Explore</button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </section>
     </main>
     <script src="./app.js"></script>
   </body>

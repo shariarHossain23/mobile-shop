@@ -1,8 +1,17 @@
-/* header style */
-/* header left */
+/* default style */
 body {
   background-color: #ffffff;
 }
+.mobile-btn {
+  background-color: #f85606;
+  color: #fff;
+  border: none;
+  padding: 5px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+/* header style */
+/* header left */
 .header-left img {
   width: 60px;
   color: orange;
@@ -25,4 +34,12 @@ body {
   color: #fff;
   padding: 0 10px;
   line-height: 40px;
+}
+.card {
+  padding: 20px;
+  box-shadow: 2px 4px 8px rgba(90, 89, 89, 0.57);
+  text-align: center;
+}
+.card img {
+  width: 100px;
 }
