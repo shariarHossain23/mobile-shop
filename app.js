@@ -7,7 +7,7 @@ const loadData = async () => {
     const searchValue = searchInput.value.toLowerCase();
     document.getElementById("spinner").style.display = "block"
 
-    //  clear display\]
+    //  clear display
     searchInput.value = "";
     document.getElementById("error-msg").style.display = "none";
     document.getElementById("phone-show").textContent = "";
@@ -44,7 +44,7 @@ const showDisplayData = mobiles =>{
                       <img src="${mobile.image}" alt="" />
                   </div>
                   <h5>Name: ${mobile.phone_name}</h5>
-                  <h5>Model:${mobile.brand}</h5>
+                  <h5>Brand:${mobile.brand}</h5>
                   <div>
                   <button onclick="loadDetails('${mobile.slug}')" class="mobile-btn">
                   Explore
