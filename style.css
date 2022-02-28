@@ -35,11 +35,21 @@ body {
   padding: 0 10px;
   line-height: 40px;
 }
-.card {
+.card-mobile {
   padding: 20px;
   box-shadow: 2px 4px 8px rgba(90, 89, 89, 0.57);
   text-align: center;
 }
-.card img {
+.card-mobile img {
   width: 100px;
+}
+
+/* card details */
+.card-details {
+  padding: 5px;
+  box-shadow: 2px 4px 8px rgba(90, 89, 89, 0.57);
+  overflow: hidden;
+}
+.card-details ul {
+  font-size: 10px;
 }

@@ -5,8 +5,9 @@ const loadData = async () => {
     const searchValue = searchInput.value.toLowerCase();
 
     //  clear display\]
-    searchInput.value = ""
-    document.getElementById("phone-show").textContent = ""
+    searchInput.value = "";
+    document.getElementById("phone-show").textContent = "";
+    document.getElementById("details").textContent = "";
 
     // fetching data
    const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`;
@@ -21,20 +22,17 @@ const loadData = async () => {
 // show ui load data
 const showDisplayData = mobiles =>{
     const showPhone = document.getElementById("phone-show");
-
     if(mobiles.length === 0){
       document.getElementById("error-text").innerText = "No result found"
     }
-    else if(mobiles.length === 20){
-        
+    else if(mobiles.length <= 20){
     }
     else{
         mobiles.forEach(mobile => {
-        
-            const newDiv = document.createElement("div");
+           const newDiv = document.createElement("div");
             newDiv.classList.add("col-md-4");
             newDiv.innerHTML = `
-            <div class="card mt-4">
+            <div class="card-mobile mt-4">
                     <div>
                         <img src="${mobile.image}" alt="" />
                     </div>
@@ -62,6 +60,48 @@ const loadDetails = details =>{
     .then(res => res.json())
     .then(data => showDetailsUi(data.data))
 }
+// show ui
 const showDetailsUi = details => {
+    const showDetails = document.getElementById("details");
+
+    // clear display 
+    document.getElementById("phone-show").textContent = "";
+
+    // sensor
+    let sensor = "";
+     const sensors = details.mainFeatures.sensors;
+     for (let i = 0; i < sensors.length; i++) {
+       const element = sensors[i];
+       sensor += `${element}${","}`
+     }
+    //  others 
+    const {WLAN,Bluetooth,GPS,NFC,Radio,USB} = details.others;
+    //  show ui
+    const detailDiv = document.createElement("div");
+    detailDiv.classList.add("col-md-6")
+    detailDiv.classList.add("col-sm-12")
+    detailDiv.classList.add("mx-auto")
+    detailDiv.innerHTML =`
+    <div class="card card-details">
+                <div class ="text-center">
+                  <img src="${details.image}" alt="" />
+                </div>
+                <ul class="mt-3">
+                  <li>Name: ${details.name}</li>
+                  <li>ReleaseDate:${details.releaseDate?details.releaseDate: "no releaseDate" }</li>
+                  <li>Brand: ${details.brand}</li>
+                  <li>Memory: ${details.mainFeatures.memory}</li>
+                  <li>Display: ${details.mainFeatures.displaySize}</li>
+                  <li><small>Sensors:${sensor}</small></li>
+                  <li>Wlan:${WLAN}</li>
+                  <li>Bluetooth:${Bluetooth}</li>
+                  <li>GPS:${GPS}</li>
+                  <li>NFC:${NFC}</li>
+                  <li>Radio:${Radio}</li>
+                  <li>USB:${USB}</li>
+                </ul>
+              </div>
+    `
+    showDetails.appendChild(detailDiv);
     console.log(details)
 }
