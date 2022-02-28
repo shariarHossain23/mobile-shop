@@ -60,5 +60,8 @@ const showDisplayData = mobiles =>{
 const loadDetails = details =>{
     fetch(`https://openapi.programming-hero.com/api/phone/${details}`)
     .then(res => res.json())
-    .then(data => console.log(data.data))
+    .then(data => showDetailsUi(data.data))
+}
+const showDetailsUi = details => {
+    console.log(details)
 }
