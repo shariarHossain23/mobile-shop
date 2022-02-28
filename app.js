@@ -1,11 +1,15 @@
+document.getElementById("error-msg").style.display = "none";
+document.getElementById("spinner").style.display = "none"
 // phone search data
 const loadData = async () => {
    try {
     const searchInput = document.getElementById('search-input');
     const searchValue = searchInput.value.toLowerCase();
+    document.getElementById("spinner").style.display = "block"
 
     //  clear display\]
     searchInput.value = "";
+    document.getElementById("error-msg").style.display = "none";
     document.getElementById("phone-show").textContent = "";
     document.getElementById("details").textContent = "";
 
@@ -13,49 +17,52 @@ const loadData = async () => {
    const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`;
    const res = await fetch(url);
    const data = await res.json();
-   showDisplayData(data.data)
+   showDisplayData(data.data.slice(0,20))
    } catch (error) {
-       console.log(error)
+       errorMessage(error)
+       document.getElementById("spinner").style.display = "none"
    }
 }
-
+// error message
+const errorMessage = () =>{
+  document.getElementById("error-msg").style.display = "block";
+}
 // show ui load data
 const showDisplayData = mobiles =>{
-    const showPhone = document.getElementById("phone-show");
-    if(mobiles.length === 0){
-      document.getElementById("error-text").innerText = "No result found"
-    }
-    else if(mobiles.length <= 20){
-    }
-    else{
-        mobiles.forEach(mobile => {
-           const newDiv = document.createElement("div");
-            newDiv.classList.add("col-md-4");
-            newDiv.innerHTML = `
-            <div class="card-mobile mt-4">
-                    <div>
-                        <img src="${mobile.image}" alt="" />
-                    </div>
-                    <h5>Name: ${mobile.phone_name}</h5>
-                    <h5>Model:${mobile.brand}</h5>
-                    <div>
-                    <button onclick="loadDetails('${mobile.slug}')" class="mobile-btn">
-                    Explore
-                  </button>
-                    </div>
-            </div>
-            `
-            // console.log(mobile.slug)
-            showPhone.appendChild(newDiv);
-            // clear display
-            document.getElementById("error-text").innerText = "";
-        });
-    }
-   
+  const showPhone = document.getElementById("phone-show");
+  document.getElementById("spinner").style.display = "none"
+  if(mobiles.length === 0){
+    document.getElementById("error-text").innerText = "No result found"
+  }
+  else{
+      mobiles.forEach(mobile => {
+         const newDiv = document.createElement("div");
+          newDiv.classList.add("col-md-4");
+          newDiv.innerHTML = `
+          <div class="card card-mobile mt-4">
+                  <div>
+                      <img src="${mobile.image}" alt="" />
+                  </div>
+                  <h5>Name: ${mobile.phone_name}</h5>
+                  <h5>Model:${mobile.brand}</h5>
+                  <div>
+                  <button onclick="loadDetails('${mobile.slug}')" class="mobile-btn">
+                  Explore
+                </button>
+                  </div>
+          </div>
+          `
+          // console.log(mobile.slug)
+          showPhone.appendChild(newDiv);
+          // clear display
+          document.getElementById("error-text").innerText = "";
+      });
+  }
 }
 
-//  calling details
+//  fetching details
 const loadDetails = details =>{
+  document.getElementById("spinner").style.display = "block"
     fetch(`https://openapi.programming-hero.com/api/phone/${details}`)
     .then(res => res.json())
     .then(data => showDetailsUi(data.data))
@@ -63,6 +70,7 @@ const loadDetails = details =>{
 // show ui
 const showDetailsUi = details => {
     const showDetails = document.getElementById("details");
+    document.getElementById("spinner").style.display = "none"
 
     // clear display 
     document.getElementById("phone-show").textContent = "";
@@ -103,5 +111,4 @@ const showDetailsUi = details => {
               </div>
     `
     showDetails.appendChild(detailDiv);
-    console.log(details)
 }

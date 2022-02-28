@@ -42,6 +42,7 @@ body {
 }
 .card-mobile img {
   width: 100px;
+  height: 100%;
 }
 
 /* card details */
@@ -52,4 +53,8 @@ body {
 }
 .card-details ul {
   font-size: 10px;
+}
+/* show all */
+#show-all-button {
+  display: none;
 }
