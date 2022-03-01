@@ -10,8 +10,8 @@ const loadData = async () => {
     //  clear display
     searchInput.value = "";
     document.getElementById("error-msg").style.display = "none";
-    document.getElementById("phone-show").textContent = "";
-    document.getElementById("details").textContent = "";
+    displayClear("phone-show")
+    displayClear("details")
 
     // fetching data
    const url = `https://openapi.programming-hero.com/api/phones?search=${searchValue}`;
@@ -52,7 +52,6 @@ const showDisplayData = mobiles =>{
                   </div>
           </div>
           `
-          // console.log(mobile.slug)
           showPhone.appendChild(newDiv);
           // clear display
           document.getElementById("error-text").innerText = "";
@@ -71,22 +70,14 @@ const loadDetails = details =>{
 const showDetailsUi = details => {
     const showDetails = document.getElementById("details");
     document.getElementById("spinner").style.display = "none"
-
-    // clear display 
-    document.getElementById("phone-show").textContent = "";
-
+    displayClear("details")
     // sensor
-    let sensor = "";
      const sensors = details.mainFeatures.sensors;
-     for (let i = 0; i < sensors.length; i++) {
-       const element = sensors[i];
-       sensor += `${element}${","}`
-     }
     //  others 
     const {WLAN,Bluetooth,GPS,NFC,Radio,USB} = details.others;
     //  show ui
     const detailDiv = document.createElement("div");
-    detailDiv.classList.add("col-md-6")
+    detailDiv.classList.add("col-md-4")
     detailDiv.classList.add("col-sm-12")
     detailDiv.classList.add("mx-auto")
     detailDiv.innerHTML =`
@@ -96,11 +87,11 @@ const showDetailsUi = details => {
                 </div>
                 <ul class="mt-3">
                   <li>Name: ${details.name}</li>
-                  <li>ReleaseDate:${details.releaseDate?details.releaseDate: "no releaseDate" }</li>
+                  <li>ReleaseDate:${details.releaseDate?details.releaseDate: "coming soon" }</li>
                   <li>Brand: ${details.brand}</li>
                   <li>Memory: ${details.mainFeatures.memory}</li>
                   <li>Display: ${details.mainFeatures.displaySize}</li>
-                  <li><small>Sensors:${sensor}</small></li>
+                  <li>Sensors:${sensors.toString()}</li>
                   <li>Wlan:${WLAN}</li>
                   <li>Bluetooth:${Bluetooth}</li>
                   <li>GPS:${GPS}</li>
@@ -111,4 +102,10 @@ const showDetailsUi = details => {
               </div>
     `
     showDetails.appendChild(detailDiv);
+}
+
+// clear display 
+
+const displayClear = id => {
+  document.getElementById(id).textContent = "";
 }
