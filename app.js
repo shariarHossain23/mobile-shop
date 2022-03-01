@@ -103,13 +103,9 @@ const showDetailsUi = details => {
     displayClear("details")
     // sensor
      const sensors = details.mainFeatures.sensors;
+    //  others
      const others = details.others;
-       if(others == null){
-         const otherError = "no result"
-       }
-       else{
-         const other = Object.entries(others);
-       }
+       
    //  show ui
     const detailDiv = document.createElement("div");
     detailDiv.classList.add("col-md-6")
@@ -127,7 +123,7 @@ const showDetailsUi = details => {
                   <li>Memory: ${details.mainFeatures.memory}</li>
                   <li>Display: ${details.mainFeatures.displaySize}</li>
                   <li>Sensors:${sensors.toString()}</li>
-                  <li>others:${(others== null? "no others data" :Object.entries(others))}</li>
+                  <li>others :${(others== null? "no others data" :Object.entries(others))}</li>
                 </ul>
               </div>
     `

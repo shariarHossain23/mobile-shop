@@ -1,7 +1,5 @@
 /* default style */
-body {
-  background-color: #ffffff;
-}
+
 .mobile-btn {
   background-color: #f85606;
   color: #fff;
@@ -13,6 +11,9 @@ body {
 }
 /* header style */
 /* header left */
+.header-style {
+  background-color: antiquewhite;
+}
 .header-left img {
   width: 60px;
   color: orange;
