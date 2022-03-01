@@ -9,6 +9,7 @@ body {
   padding: 5px 20px;
   border-radius: 5px;
   margin-top: 10px;
+  margin: 20px auto;
 }
 /* header style */
 /* header left */
@@ -47,7 +48,7 @@ body {
 
 /* card details */
 .card-details {
-  padding: 5px;
+  padding: 10px;
   box-shadow: 2px 4px 8px rgba(90, 89, 89, 0.57);
   overflow: hidden;
 }
