@@ -1,6 +1,8 @@
+// default display none
 document.getElementById("error-msg").style.display = "none";
 document.getElementById("spinner").style.display = "none"
 document.getElementById("show-all").style.display = "none"
+
 // phone search data
 const loadData = async () => {
    try {
@@ -93,7 +95,7 @@ const loadDetails = details =>{
     .then(res => res.json())
     .then(data => showDetailsUi(data.data))
 }
-// show ui
+// show details ui
 const showDetailsUi = details => {
     const showDetails = document.getElementById("details");
     document.getElementById("spinner").style.display = "none"
@@ -102,6 +104,7 @@ const showDetailsUi = details => {
      const sensors = details.mainFeatures.sensors;
     //  others 
     const {WLAN,Bluetooth,GPS,NFC,Radio,USB} = details.others;
+    
     //  show ui
     const detailDiv = document.createElement("div");
     detailDiv.classList.add("col-md-6")
