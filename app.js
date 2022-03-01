@@ -65,6 +65,7 @@ const showDisplayData = mobiles =>{
   // show all mobiles product
  document.getElementById("show-all").addEventListener("click",function(){
   mobiles.slice(21,mobiles.length).forEach(mobile => {
+    console.log(mobile)
     const newDiv = document.createElement("div");
      newDiv.classList.add("col-md-4");
      newDiv.innerHTML = `
@@ -102,35 +103,36 @@ const showDetailsUi = details => {
     displayClear("details")
     // sensor
      const sensors = details.mainFeatures.sensors;
-    //  others 
-    const {WLAN,Bluetooth,GPS,NFC,Radio,USB} = details.others;
-    
-    //  show ui
+     const others = details.others;
+       if(others == null){
+         const otherError = "no result"
+       }
+       else{
+         const other = Object.entries(others);
+       }
+   //  show ui
     const detailDiv = document.createElement("div");
     detailDiv.classList.add("col-md-6")
     detailDiv.classList.add("col-sm-12")
     detailDiv.classList.add("mx-auto")
     detailDiv.innerHTML =`
-    <div class="card card-details">
+    <div id="card-item" class="card card-details">
                 <div class ="text-center">
                   <img src="${details.image}" alt="" />
                 </div>
-                <ul class="mt-3">
+                <ul id="item-list" class="mt-3">
                   <li>Name: ${details.name}</li>
                   <li>ReleaseDate:${details.releaseDate?details.releaseDate: "coming soon" }</li>
                   <li>Brand: ${details.brand}</li>
                   <li>Memory: ${details.mainFeatures.memory}</li>
                   <li>Display: ${details.mainFeatures.displaySize}</li>
                   <li>Sensors:${sensors.toString()}</li>
-                  <li>Wlan:${WLAN}</li>
-                  <li>Bluetooth:${Bluetooth}</li>
-                  <li>GPS:${GPS}</li>
-                  <li>NFC:${NFC}</li>
-                  <li>Radio:${Radio}</li>
-                  <li>USB:${USB}</li>
+                  <li>others:${(others== null? "no others data" :Object.entries(others))}</li>
                 </ul>
               </div>
     `
+    //  others 
+  
     showDetails.appendChild(detailDiv);
 }
 
